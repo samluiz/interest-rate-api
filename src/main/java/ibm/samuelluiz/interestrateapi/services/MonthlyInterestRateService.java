@@ -1,6 +1,8 @@
 package ibm.samuelluiz.interestrateapi.services;
 
 import ibm.samuelluiz.interestrateapi.clients.MainClient;
+import ibm.samuelluiz.interestrateapi.exceptions.services.InvalidQueryException;
+import ibm.samuelluiz.interestrateapi.exceptions.services.ResourceNotFoundException;
 import ibm.samuelluiz.interestrateapi.models.MonthlyInterestRate;
 import ibm.samuelluiz.interestrateapi.repositories.MonthlyInterestRateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class MonthlyInterestRateService {
@@ -28,5 +31,23 @@ public class MonthlyInterestRateService {
 
     public List<MonthlyInterestRate> populate() {
         return repository.saveAll(client.populate(50).getResults());
+    }
+
+    public List<MonthlyInterestRate> findAll(Pageable pageable) {
+        return repository.findAll(pageable).getContent();
+    }
+
+    public MonthlyInterestRate findByUUID(UUID uuid) {
+        if (uuid.toString().length() != UUID.randomUUID().toString().length()) {
+            throw new InvalidQueryException("The UUID provided in the URL is not valid.");
+        }
+        return repository.findById(uuid).orElseThrow(() -> new ResourceNotFoundException(uuid));
+    }
+
+    public List<MonthlyInterestRate> findAllByYearMonth(String yearMonth) {
+        if (!yearMonth.matches("\\d{4}-\\d{2}")) {
+            throw new InvalidQueryException("The year-month URL parameter must be in this format: yyyy-mm");
+        }
+        return repository.findAllBy_yearMonth(yearMonth);
     }
 }
