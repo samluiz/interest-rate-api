@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/monthly")
 public class MonthlyInterestRateController {
 
-    private MonthlyInterestRateService service;
+    private final MonthlyInterestRateService service;
 
     @Autowired
     public MonthlyInterestRateController(MonthlyInterestRateService service) {
@@ -23,7 +24,10 @@ public class MonthlyInterestRateController {
     }
 
     @GetMapping("/populate")
-    public void populate(@RequestParam Optional<Integer> limit) {
-        service.populate(limit);
+    public List<MonthlyInterestRate> populate(@RequestParam Optional<Integer> limit) {
+        return limit.map(integer -> service.populate(integer)
+                .stream()
+                .limit(100)
+                .collect(Collectors.toList())).orElseGet(service::populate);
     }
 }

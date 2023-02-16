@@ -22,21 +22,21 @@ public class MonthlyInterestRate {
 
     @Id
     @UuidGenerator
-    private UUID id;
+    private UUID _uuid;
     @JsonProperty("Modalidade")
-    private String modality;
+    private String _modality;
     @JsonProperty("Posicao")
-    private Integer position;
+    private Integer _position;
     @JsonProperty("InstituicaoFinanceira")
-    private String financialInstitution;
+    private String _financialInstitution;
     @JsonProperty("TaxaJurosAoMes")
-    private Double interestRateByMonth;
+    private Double _interestRateByMonth;
     @JsonProperty("TaxaJurosAoAno")
-    private Double interestRateByYear;
+    private Double _interestRateByYear;
     @JsonProperty("cnpj8")
-    private String eightDigitsCnpj;
+    private String _eightDigitsCnpj;
     @JsonProperty("Mes")
-    private String month;
+    private String _month;
     @JsonProperty("anoMes")
-    private String yearMonth;
+    private String _yearMonth;
 }
