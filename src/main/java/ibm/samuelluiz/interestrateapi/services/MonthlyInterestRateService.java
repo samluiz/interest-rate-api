@@ -6,6 +6,7 @@ import ibm.samuelluiz.interestrateapi.exceptions.services.ResourceNotFoundExcept
 import ibm.samuelluiz.interestrateapi.models.MonthlyInterestRate;
 import ibm.samuelluiz.interestrateapi.repositories.MonthlyInterestRateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -33,8 +34,8 @@ public class MonthlyInterestRateService {
         return repository.saveAll(client.populate(50).getResults());
     }
 
-    public List<MonthlyInterestRate> findAll(Pageable pageable) {
-        return repository.findAll(pageable).getContent();
+    public Page<MonthlyInterestRate> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     public MonthlyInterestRate findByUUID(UUID uuid) {
@@ -44,10 +45,10 @@ public class MonthlyInterestRateService {
         return repository.findById(uuid).orElseThrow(() -> new ResourceNotFoundException(uuid));
     }
 
-    public List<MonthlyInterestRate> findAllByYearMonth(String yearMonth) {
+    public Page<MonthlyInterestRate> findAllByYearMonth(String yearMonth, Pageable pageable) {
         if (!yearMonth.matches("\\d{4}-\\d{2}")) {
             throw new InvalidQueryException("The year-month URL parameter must be in this format: yyyy-mm");
         }
-        return repository.findAllBy_yearMonth(yearMonth);
+        return repository.findAllBy_yearMonth(yearMonth, pageable);
     }
 }
