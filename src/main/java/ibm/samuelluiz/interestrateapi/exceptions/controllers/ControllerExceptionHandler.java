@@ -1,5 +1,6 @@
 package ibm.samuelluiz.interestrateapi.exceptions.controllers;
 
+import ibm.samuelluiz.interestrateapi.exceptions.services.DatabaseConstraintException;
 import ibm.samuelluiz.interestrateapi.exceptions.services.InvalidQueryException;
 import ibm.samuelluiz.interestrateapi.exceptions.services.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -32,6 +33,21 @@ public class ControllerExceptionHandler {
     public ResponseEntity<StandardError> resourceNotFound(InvalidQueryException e, HttpServletRequest request) {
         String error = "Invalid URL query.";
         HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError err = new StandardError(
+                Instant.now(),
+                status.value(),
+                error,
+                e.getMessage(),
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(DatabaseConstraintException.class)
+    public ResponseEntity<StandardError> databaseError(DatabaseConstraintException e, HttpServletRequest request) {
+        String error = "Database error.";
+        HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
         StandardError err = new StandardError(
                 Instant.now(),
                 status.value(),

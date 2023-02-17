@@ -34,8 +34,8 @@ public class MonthlyInterestRateController {
     @GetMapping
     public ResponseEntity<Map<String, Object>> findAll(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
-            @RequestParam(value = "size", defaultValue = "1000") Integer size,
-            @RequestParam(value = "year-month", defaultValue = "", required = false) String yearMonth) {
+            @RequestParam(value = "size", defaultValue = "10000") Integer size,
+            @RequestParam(value = "anoMes", defaultValue = "", required = false) String yearMonth) {
         Map<String, Object> response = new HashMap<>();
         PageRequest paging = PageRequest.of(page, size);
 

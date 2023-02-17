@@ -4,6 +4,6 @@ import java.util.UUID;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String uuid) {
-        super("Object with UUID: " + uuid + " not found.");
+        super("Objeto com UUID: " + uuid + " não existe.");
     }
 }
