@@ -56,7 +56,7 @@ public class MonthlyInterestRateController {
     }
 
     @GetMapping("/{uuid}")
-    public MonthlyInterestRate findByUUID(@PathVariable UUID uuid) {
+    public MonthlyInterestRate findByUUID(@PathVariable String uuid) {
         return service.findByUUID(uuid);
     }
 }

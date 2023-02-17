@@ -38,8 +38,8 @@ public class MonthlyInterestRateService {
         return repository.findAll(pageable);
     }
 
-    public MonthlyInterestRate findByUUID(UUID uuid) {
-        if (uuid.toString().length() != UUID.randomUUID().toString().length()) {
+    public MonthlyInterestRate findByUUID(String uuid) {
+        if (uuid.length() != UUID.randomUUID().toString().length()) {
             throw new InvalidQueryException("The UUID provided in the URL is not valid.");
         }
         return repository.findById(uuid).orElseThrow(() -> new ResourceNotFoundException(uuid));
@@ -47,8 +47,12 @@ public class MonthlyInterestRateService {
 
     public Page<MonthlyInterestRate> findAllByYearMonth(String yearMonth, Pageable pageable) {
         if (!yearMonth.matches("\\d{4}-\\d{2}")) {
-            throw new InvalidQueryException("The year-month URL parameter must be in this format: yyyy-mm");
+            throw new InvalidQueryException("The year-month URL parameter must follow this pattern: yyyy-mm");
         }
         return repository.findAllBy_yearMonth(yearMonth, pageable);
+    }
+
+    public MonthlyInterestRate add(MonthlyInterestRate obj) {
+        return repository.save(obj);
     }
 }
