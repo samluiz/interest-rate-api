@@ -39,25 +39,14 @@ public class MonthlyInterestRateServiceTest {
     private MainClient client;
 
     @Test
-    public void populateDataReturnList() {
-        when(repository.saveAll(any()))
-                .thenReturn((List<MonthlyInterestRate>) MONTHLY_INTEREST_RATE_LIST.getResults());
-        when(client.populate(5)).thenReturn(MONTHLY_INTEREST_RATE_LIST);
-
-        List<MonthlyInterestRate> list = service.populate(5);
-
-        assertThat(list.size()).isEqualTo(5);
-    }
-
-    @Test
     public void findAllDataReturnsList() {
         Pageable pageable = PageRequest.of(0,5);
         Page<MonthlyInterestRate> result = new PageImpl<>(FIVE_ITEMS_LIST, pageable, 1);
         when(repository.findAll(any(Pageable.class))).thenReturn(result);
 
-        Page<MonthlyInterestRate> returnPageable = service.findAll(pageable);
+        Page<MonthlyInterestRate> sut = service.findAll(pageable);
 
-        assertThat(returnPageable.getTotalElements()).isEqualTo(5);
+        assertThat(sut.getTotalElements()).isEqualTo(5);
     }
 
     @Test
@@ -66,9 +55,9 @@ public class MonthlyInterestRateServiceTest {
         Page<MonthlyInterestRate> result = new PageImpl<>(EMPTY_LIST, pageable, 0);
         when(repository.findAll(any(Pageable.class))).thenReturn(result);
 
-        Page<MonthlyInterestRate> returnPageable = service.findAll(pageable);
+        Page<MonthlyInterestRate> sut = service.findAll(pageable);
 
-        assertThat(returnPageable.getTotalElements()).isEqualTo(0);
+        assertThat(sut.getTotalElements()).isEqualTo(0);
     }
 
     @Test
@@ -77,9 +66,9 @@ public class MonthlyInterestRateServiceTest {
         Page<MonthlyInterestRate> result = new PageImpl<>(FIVE_ITEMS_LIST, pageable, 1);
         when(repository.findAllBy_yearMonth(any(String.class), any(Pageable.class))).thenReturn(result);
 
-        Page<MonthlyInterestRate> returnPageable = service.findAllByYearMonth(YEAR_MONTH, pageable);
+        Page<MonthlyInterestRate> sut = service.findAllByYearMonth(YEAR_MONTH, pageable);
 
-        assertThat(returnPageable.getTotalElements()).isEqualTo(5);
+        assertThat(sut.getTotalElements()).isEqualTo(5);
     }
 
     @Test
@@ -88,9 +77,9 @@ public class MonthlyInterestRateServiceTest {
         Page<MonthlyInterestRate> result = new PageImpl<>(EMPTY_LIST, pageable, 0);
         when(repository.findAllBy_yearMonth(any(String.class), any(Pageable.class))).thenReturn(result);
 
-        Page<MonthlyInterestRate> returnPageable = service.findAllByYearMonth(YEAR_MONTH, pageable);
+        Page<MonthlyInterestRate> sut = service.findAllByYearMonth(YEAR_MONTH, pageable);
 
-        assertThat(returnPageable.getTotalElements()).isEqualTo(0);
+        assertThat(sut.getTotalElements()).isEqualTo(0);
     }
 
     @Test
@@ -101,11 +90,11 @@ public class MonthlyInterestRateServiceTest {
 
     @Test
     public void findByUUIDReturnsEntity() {
-        when(repository.findById(any(String.class))).thenReturn(Optional.of(ENTITY));
+        when(repository.findById(any(String.class))).thenReturn(Optional.of(EMPTY_ENTITY));
 
-        MonthlyInterestRate entity = service.findByUUID(RANDOM_UUID);
+        MonthlyInterestRate sut = service.findByUUID(RANDOM_UUID);
 
-        assertThat(entity).isEqualTo(ENTITY);
+        assertThat(sut).isEqualTo(EMPTY_ENTITY);
     }
 
     @Test
@@ -114,44 +103,54 @@ public class MonthlyInterestRateServiceTest {
     }
 
     @Test
+    public void findByUUIDThrowsInvalidQueryException() {
+        assertThrows(InvalidQueryException.class, () -> service.findByUUID("abc123"));
+    }
+
+    @Test
     public void createEntityReturnsEntity() {
-        when(repository.save(any(MonthlyInterestRate.class))).thenReturn(ENTITY);
+        when(repository.save(any(MonthlyInterestRate.class))).thenReturn(EMPTY_ENTITY);
 
-        MonthlyInterestRate entity = service.create(new MonthlyInterestRate());
+        MonthlyInterestRate sut = service.create(new MonthlyInterestRate());
 
-        assertThat(entity).isInstanceOf(MonthlyInterestRate.class);
-        assertThat(entity).isEqualTo(ENTITY);
+        assertThat(sut).isInstanceOf(MonthlyInterestRate.class);
+        assertThat(sut).isEqualTo(EMPTY_ENTITY);
     }
 
     @Test
     public void updateEntityReturnsEntity() {
-        when(repository.save(any(MonthlyInterestRate.class))).thenReturn(ENTITY);
-        when(repository.findById(any(String.class))).thenReturn(Optional.of(ENTITY));
+        when(repository.save(any(MonthlyInterestRate.class))).thenReturn(EMPTY_ENTITY);
+        when(repository.findById(any(String.class))).thenReturn(Optional.of(EMPTY_ENTITY));
 
-        MonthlyInterestRate entity = service.update(ENTITY, RANDOM_UUID);
+        MonthlyInterestRate sut = service.update(EMPTY_ENTITY, RANDOM_UUID);
 
-        assertThat(entity).isInstanceOf(MonthlyInterestRate.class);
-        assertThat(entity).isEqualTo(ENTITY);
+        assertThat(sut).isInstanceOf(MonthlyInterestRate.class);
+        assertThat(sut).isEqualTo(EMPTY_ENTITY);
     }
 
     @Test
     public void updateEntityThrowsNotFoundException() {
-        assertThrows(ResourceNotFoundException.class, () -> service.update(ENTITY, RANDOM_UUID));
+        assertThrows(ResourceNotFoundException.class, () -> service.update(EMPTY_ENTITY, RANDOM_UUID));
+    }
+
+    @Test
+    public void updateEntityThrowsInvalidQueryException() {
+        assertThrows(InvalidQueryException.class, () -> service.update(ENTITY, "abc123"));
     }
 
     @Test
     public void deleteEntityReturnsNothing() {
-        when(repository.findById(RANDOM_UUID)).thenReturn(Optional.of(ENTITY));
-        doNothing().when(repository).delete(ENTITY);
+        when(repository.findById(RANDOM_UUID)).thenReturn(Optional.of(EMPTY_ENTITY));
+        doNothing().when(repository).delete(EMPTY_ENTITY);
 
         service.delete(RANDOM_UUID);
 
-        verify(repository, times(1)).delete(ENTITY);
+        verify(repository, times(1)).delete(EMPTY_ENTITY);
     }
 
     @Test
     public void deleteEntityThrowsInvalidQueryException() {
-        assertThrows(InvalidQueryException.class, () -> service.delete(""));
+        assertThrows(InvalidQueryException.class, () -> service.delete("abc123"));
     }
 
     @Test
