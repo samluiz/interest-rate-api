@@ -62,6 +62,9 @@ public class MonthlyInterestRateService {
     }
 
     public MonthlyInterestRate update(MonthlyInterestRate obj, String uuid) {
+        if (uuid.length() != UUID.randomUUID().toString().length()) {
+            throw new InvalidQueryException("The UUID provided in the URL is not valid.");
+        }
         Optional<MonthlyInterestRate> updatedObj = repository.findById(uuid);
         copyProperties(obj,
                 updatedObj.orElseThrow(() -> new ResourceNotFoundException(uuid)),
@@ -70,7 +73,10 @@ public class MonthlyInterestRateService {
     }
 
     public void delete(String uuid) {
-        MonthlyInterestRate obj = repository.getReferenceById(uuid);
+        if (uuid.length() != UUID.randomUUID().toString().length()) {
+            throw new InvalidQueryException("The UUID provided in the URL is not valid.");
+        }
+        MonthlyInterestRate obj = repository.findById(uuid).orElseThrow(() -> new ResourceNotFoundException(uuid));
         repository.delete(obj);
     }
 }
