@@ -5,20 +5,10 @@ import ibm.samuelluiz.interestrateapi.models.dtos.MonthlyInterestRateList;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public class Constants {
-    public static final MonthlyInterestRateList MONTHLY_INTEREST_RATE_LIST = new MonthlyInterestRateList(List.of(new MonthlyInterestRate(),
-            new MonthlyInterestRate(),
-            new MonthlyInterestRate(),
-            new MonthlyInterestRate(),
-            new MonthlyInterestRate()));
-
-    public static final List<MonthlyInterestRate> FIVE_ITEMS_LIST = new ArrayList<>(List.of(new MonthlyInterestRate(),
-            new MonthlyInterestRate(),
-            new MonthlyInterestRate(),
-            new MonthlyInterestRate(),
-            new MonthlyInterestRate()));
 
     public static final List<MonthlyInterestRate> EMPTY_LIST = new ArrayList<>();
 
@@ -116,6 +106,14 @@ public class Constants {
             null,
             null,
             null);
+
+    public static final MonthlyInterestRateList MONTHLY_INTEREST_RATE_LIST = new MonthlyInterestRateList(Set.of(ENTITY, ENTITY_2, ENTITY_3, EMPTY_ENTITY, ENTITY_INVALID_CNPJ));
+
+    public static final List<MonthlyInterestRate> FIVE_ITEMS_LIST = new ArrayList<>(List.of(new MonthlyInterestRate(),
+            new MonthlyInterestRate(),
+            new MonthlyInterestRate(),
+            new MonthlyInterestRate(),
+            new MonthlyInterestRate()));
 
     public static final String RANDOM_UUID = UUID.randomUUID().toString();
 
