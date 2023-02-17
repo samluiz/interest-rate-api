@@ -9,13 +9,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
-import java.time.Month;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/monthly")
+@RequestMapping(value = "/taxaJurosMensal")
 public class MonthlyInterestRateController {
 
     private final MonthlyInterestRateService service;
@@ -25,7 +25,7 @@ public class MonthlyInterestRateController {
         this.service = service;
     }
 
-    @GetMapping("/populate")
+    @GetMapping("/popular")
     public List<MonthlyInterestRate> populate(@RequestParam(value = "limit", defaultValue = "100") Integer limit) {
         List<MonthlyInterestRate> list = service.populate(limit);
         return limit > 100 ? list.stream().limit(100).collect(Collectors.toList()) : list;

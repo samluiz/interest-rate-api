@@ -47,4 +47,9 @@ public class MonthlyInterestRateRepositoryTest {
         assertThatThrownBy(() -> repository.save(ENTITY_INVALID_MONTH));
         assertThatThrownBy(() -> repository.save(ENTITY_INVALID_YEAR_MONTH));
     }
+
+    @Test
+    public void updateEntityReturnsEntity() {
+
+    }
 }
