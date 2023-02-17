@@ -5,10 +5,12 @@ import ibm.samuelluiz.interestrateapi.services.MonthlyInterestRateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.html.Option;
+import java.time.Month;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -58,5 +60,22 @@ public class MonthlyInterestRateController {
     @GetMapping("/{uuid}")
     public MonthlyInterestRate findByUUID(@PathVariable String uuid) {
         return service.findByUUID(uuid);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public MonthlyInterestRate create(@RequestBody MonthlyInterestRate obj) {
+        return service.create(obj);
+    }
+
+    @PutMapping("/{uuid}")
+    public MonthlyInterestRate update(@RequestBody MonthlyInterestRate obj, @PathVariable String uuid) {
+        return service.update(obj, uuid);
+    }
+
+    @DeleteMapping("/{uuid}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable String uuid) {
+        service.delete(uuid);
     }
 }

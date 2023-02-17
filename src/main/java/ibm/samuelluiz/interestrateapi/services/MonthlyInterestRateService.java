@@ -5,6 +5,8 @@ import ibm.samuelluiz.interestrateapi.exceptions.services.InvalidQueryException;
 import ibm.samuelluiz.interestrateapi.exceptions.services.ResourceNotFoundException;
 import ibm.samuelluiz.interestrateapi.models.MonthlyInterestRate;
 import ibm.samuelluiz.interestrateapi.repositories.MonthlyInterestRateRepository;
+import ibm.samuelluiz.interestrateapi.utils.ServiceUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +15,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import static ibm.samuelluiz.interestrateapi.utils.ServiceUtils.*;
+import static org.springframework.beans.BeanUtils.*;
 
 @Service
 public class MonthlyInterestRateService {
@@ -52,7 +57,20 @@ public class MonthlyInterestRateService {
         return repository.findAllBy_yearMonth(yearMonth, pageable);
     }
 
-    public MonthlyInterestRate add(MonthlyInterestRate obj) {
+    public MonthlyInterestRate create(MonthlyInterestRate obj) {
         return repository.save(obj);
+    }
+
+    public MonthlyInterestRate update(MonthlyInterestRate obj, String uuid) {
+        Optional<MonthlyInterestRate> updatedObj = repository.findById(uuid);
+        copyProperties(obj,
+                updatedObj.orElseThrow(() -> new ResourceNotFoundException(uuid)),
+                getNullPropertyNames(obj));
+        return repository.save(updatedObj.get());
+    }
+
+    public void delete(String uuid) {
+        MonthlyInterestRate obj = repository.getReferenceById(uuid);
+        repository.delete(obj);
     }
 }
