@@ -24,7 +24,7 @@ public class Constants {
 
     public static final MonthlyInterestRate EMPTY_ENTITY = new MonthlyInterestRate();
 
-    public static final MonthlyInterestRate ENTITY = new MonthlyInterestRate(null,
+    public static final MonthlyInterestRate ENTITY = new MonthlyInterestRate("44e917a2-5bd8-442f-b244-6ced80586336",
             "FINANCIAMENTO",
             7,
             "ITAU UNIBANCO",
@@ -33,6 +33,29 @@ public class Constants {
             "12345678",
             "Ago-2021",
             "2021-08");
+
+    public static final MonthlyInterestRate ENTITY_2 = new MonthlyInterestRate(null,
+            "CARTAO",
+            2,
+            "ITI UNIBANCO",
+            0.85,
+            7.43,
+            "12345478",
+            "Ago-2021",
+            "2021-08");
+
+    public static final MonthlyInterestRate ENTITY_3 = new MonthlyInterestRate(null,
+            "CONSORCIO",
+            2,
+            "BRADESCO",
+            0.85,
+            7.43,
+            "12315678",
+            "Ago-2021",
+            "2021-08");
+
+    public static final List<MonthlyInterestRate> REAL_LIST = new ArrayList<>(List.of(ENTITY, ENTITY_2, ENTITY_3));
+
 
     public static final MonthlyInterestRate ENTITY_INVALID_CNPJ = new MonthlyInterestRate(null,
             "FINANCIAMENTO",

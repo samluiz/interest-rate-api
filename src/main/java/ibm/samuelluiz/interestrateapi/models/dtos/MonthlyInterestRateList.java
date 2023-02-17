@@ -7,11 +7,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Collection;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class MonthlyInterestRateList {
     @JsonProperty("value")
-    private Collection<MonthlyInterestRate> results;
+    private Set<MonthlyInterestRate> results;
 }

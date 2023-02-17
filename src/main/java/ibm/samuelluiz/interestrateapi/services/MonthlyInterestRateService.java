@@ -37,12 +37,8 @@ public class MonthlyInterestRateService {
         this.client = client;
     }
 
-    public List<MonthlyInterestRate> populate(int limit) {
-        return repository.saveAll(client.populate(limit).getResults());
-    }
-
-    public List<MonthlyInterestRate> populate() {
-        return repository.saveAll(client.populate(50).getResults());
+    public void populate(int amount) {
+        repository.saveAll(client.populate(amount).getResults());
     }
 
     public Page<MonthlyInterestRate> findAll(Pageable pageable) {

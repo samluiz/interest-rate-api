@@ -39,17 +39,6 @@ public class MonthlyInterestRateServiceTest {
     private MainClient client;
 
     @Test
-    public void populateDataReturnList() {
-        when(repository.saveAll(any()))
-                .thenReturn((List<MonthlyInterestRate>) MONTHLY_INTEREST_RATE_LIST.getResults());
-        when(client.populate(5)).thenReturn(MONTHLY_INTEREST_RATE_LIST);
-
-        List<MonthlyInterestRate> list = service.populate(5);
-
-        assertThat(list.size()).isEqualTo(5);
-    }
-
-    @Test
     public void findAllDataReturnsList() {
         Pageable pageable = PageRequest.of(0,5);
         Page<MonthlyInterestRate> result = new PageImpl<>(FIVE_ITEMS_LIST, pageable, 1);
@@ -114,6 +103,11 @@ public class MonthlyInterestRateServiceTest {
     }
 
     @Test
+    public void findByUUIDThrowsInvalidQueryException() {
+        assertThrows(InvalidQueryException.class, () -> service.findByUUID("abc123"));
+    }
+
+    @Test
     public void createEntityReturnsEntity() {
         when(repository.save(any(MonthlyInterestRate.class))).thenReturn(EMPTY_ENTITY);
 
@@ -137,6 +131,11 @@ public class MonthlyInterestRateServiceTest {
     @Test
     public void updateEntityThrowsNotFoundException() {
         assertThrows(ResourceNotFoundException.class, () -> service.update(EMPTY_ENTITY, RANDOM_UUID));
+    }
+
+    @Test
+    public void updateEntityThrowsInvalidQueryException() {
+        assertThrows(InvalidQueryException.class, () -> service.update(ENTITY, "abc123"));
     }
 
     @Test

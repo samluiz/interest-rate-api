@@ -5,6 +5,7 @@ import ibm.samuelluiz.interestrateapi.exceptions.services.InvalidQueryException;
 import ibm.samuelluiz.interestrateapi.exceptions.services.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -30,7 +31,7 @@ public class ControllerExceptionHandler {
     }
 
     @ExceptionHandler(InvalidQueryException.class)
-    public ResponseEntity<StandardError> resourceNotFound(InvalidQueryException e, HttpServletRequest request) {
+    public ResponseEntity<StandardError> invalidQuery(InvalidQueryException e, HttpServletRequest request) {
         String error = "Invalid URL query.";
         HttpStatus status = HttpStatus.BAD_REQUEST;
         StandardError err = new StandardError(
@@ -47,6 +48,20 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(DatabaseConstraintException.class)
     public ResponseEntity<StandardError> databaseError(DatabaseConstraintException e, HttpServletRequest request) {
         String error = "Database error.";
+        HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+        StandardError err = new StandardError(
+                Instant.now(),
+                status.value(),
+                error,
+                e.getMessage(),
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(status).body(err);
+    }
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<StandardError> notValid(MethodArgumentNotValidException e, HttpServletRequest request) {
+        String error = "Dados inválidos.";
         HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
         StandardError err = new StandardError(
                 Instant.now(),
