@@ -2,7 +2,6 @@ package ibm.samuelluiz.interestrateapi.controllers;
 
 import ibm.samuelluiz.interestrateapi.models.MonthlyInterestRate;
 import ibm.samuelluiz.interestrateapi.services.MonthlyInterestRateService;
-import ibm.samuelluiz.interestrateapi.utils.ControllerUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,12 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-import static ibm.samuelluiz.interestrateapi.utils.ControllerUtils.*;
+import static ibm.samuelluiz.interestrateapi.utils.ControllerUtils.generateResponse;
 
 @RestController
 @RequestMapping(value = "/taxaJurosMensal")
