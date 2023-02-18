@@ -1,29 +1,21 @@
 package ibm.samuelluiz.interestrateapi.services;
 
 import ibm.samuelluiz.interestrateapi.clients.MainClient;
-import ibm.samuelluiz.interestrateapi.exceptions.services.DatabaseConstraintException;
 import ibm.samuelluiz.interestrateapi.exceptions.services.InvalidQueryException;
 import ibm.samuelluiz.interestrateapi.exceptions.services.ResourceNotFoundException;
 import ibm.samuelluiz.interestrateapi.models.MonthlyInterestRate;
 import ibm.samuelluiz.interestrateapi.repositories.MonthlyInterestRateRepository;
-import ibm.samuelluiz.interestrateapi.utils.ServiceUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import java.sql.DataTruncation;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
-import static ibm.samuelluiz.interestrateapi.utils.ServiceUtils.*;
-import static org.springframework.beans.BeanUtils.*;
+import static ibm.samuelluiz.interestrateapi.utils.ServiceUtils.getNullPropertyNames;
+import static org.springframework.beans.BeanUtils.copyProperties;
 
 @Service
 public class MonthlyInterestRateService {
@@ -59,23 +51,10 @@ public class MonthlyInterestRateService {
         return repository.findAllBy_yearMonth(yearMonth, pageable);
     }
 
-    @Transactional
     public MonthlyInterestRate create(MonthlyInterestRate obj) {
-        try {
-            MonthlyInterestRate created = repository.save(obj);
-            repository.flush();
-            return created;
-        } catch (ConstraintViolationException e) {
-            throw new DatabaseConstraintException(e.getConstraintViolations()
-                    .stream()
-                    .map(ConstraintViolation::getMessage)
-                    .collect(Collectors.toSet())
-                    .toString()
-                    .replaceAll("\\[*]*", ""));
-        }
+            return repository.save(obj);
     }
 
-    @Transactional
     public MonthlyInterestRate update(MonthlyInterestRate obj, String uuid) {
         if (uuid.length() != UUID.randomUUID().toString().length()) {
             throw new InvalidQueryException("O UUID fornecido na URL não é válido.");
@@ -84,18 +63,7 @@ public class MonthlyInterestRateService {
         copyProperties(obj,
                 updatedObj.orElseThrow(() -> new ResourceNotFoundException(uuid)),
                 getNullPropertyNames(obj));
-        try {
-            MonthlyInterestRate updated = repository.save(updatedObj.get());
-            repository.flush();
-            return updated;
-        } catch (ConstraintViolationException e) {
-            throw new DatabaseConstraintException(e.getConstraintViolations()
-                    .stream()
-                    .map(ConstraintViolation::getMessage)
-                    .collect(Collectors.toSet())
-                    .toString()
-                    .replaceAll("\\[*]*", ""));
-        }
+            return repository.save(updatedObj.get());
     }
 
     @Transactional
