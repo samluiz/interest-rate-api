@@ -7,18 +7,21 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "TAXA_JUROS_MENSAL")
-public class MonthlyInterestRate {
+public class MonthlyInterestRate extends RepresentationModel<MonthlyInterestRate> implements Serializable {
+    public static final long serialVersionUID = 77L;
 
     @Id
     @GeneratedValue(generator = "uuid2")
