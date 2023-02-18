@@ -16,7 +16,6 @@ import javax.validation.constraints.Size;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Entity
 @Table(name = "TAXA_JUROS_MENSAL")
 public class MonthlyInterestRate {
