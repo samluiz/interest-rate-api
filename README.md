@@ -11,12 +11,16 @@ cd interest-rate-api
 docker compose up
 ```
 
-URL base:
+### Documentação Swagger:
+
+http:localhost:6868/api
+
+# Endpoints
+
+### URL base:
 ```
 http://localhost:6868
 ```
-
-# Endpoints
 
 ### GET /taxaJurosMensal -> Buscar ou popular registros no banco de dados
     ?size={int} (para informar quantos registros buscar do banco)
