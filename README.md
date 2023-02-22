@@ -11,7 +11,9 @@ cd interest-rate-api
 docker compose up
 ```
 
-[Documentação Swagger](http://localhost:6868/api)
+### Documentação
+
+<a href="http://localhost:6868/api" target="_blank">Swagger</a>
 
 # Endpoints
 
