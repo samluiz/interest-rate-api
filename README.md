@@ -22,5 +22,7 @@ URL produção: domain/api
 # Como subir a aplicação?
 
 ```
-
+git clone https://github.ibm.com/samuelluiz/interest-rate-api.git
+cd interest-rate-api
+docker compose up
 ```
