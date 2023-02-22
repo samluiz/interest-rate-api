@@ -3,10 +3,20 @@
 API que lê, salva, remove e apresenta dados das taxas de juros de operações de crédito por instituicao financeira, 
 buscando diretamente do catálogo de dados abertos do sistema financeiro nacional (DASFN) do Banco Central do Brasil.
 
-URL local: host:port/api
-URL produção: domain/api
+# Como subir a aplicação?
 
-## Endpoints
+```
+git clone https://github.ibm.com/samuelluiz/interest-rate-api.git
+cd interest-rate-api
+docker compose up
+```
+
+URL base:
+```
+http://localhost:6868
+```
+
+# Endpoints
 
 ### GET /taxaJurosMensal -> Buscar ou popular registros no banco de dados
     ?size={int} (para informar quantos registros buscar do banco)
@@ -18,11 +28,3 @@ URL produção: domain/api
 ### POST /taxaJurosMensal -> Criar um novo registro
 ### PUT /taxaJurosMensal/{uuid} -> Atualizar um registro do banco de dados
 ### DELETE /taxaJurosMensal/{uuid} -> Excluir um registro do banco de dados
-
-# Como subir a aplicação?
-
-```
-git clone https://github.ibm.com/samuelluiz/interest-rate-api.git
-cd interest-rate-api
-docker compose up
-```
