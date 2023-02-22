@@ -18,3 +18,9 @@ URL produção: domain/api
 ### POST /taxaJurosMensal -> Criar um novo registro
 ### PUT /taxaJurosMensal/{uuid} -> Atualizar um registro do banco de dados
 ### DELETE /taxaJurosMensal/{uuid} -> Excluir um registro do banco de dados
+
+# Como subir a aplicação?
+
+```
+
+```
