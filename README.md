@@ -19,7 +19,7 @@ docker compose up
 
 ### URL base:
 ```
-http://localhost:6868
+http://localhost:6868/api
 ```
 
 ### GET /taxaJurosMensal -> Buscar ou popular registros no banco de dados
