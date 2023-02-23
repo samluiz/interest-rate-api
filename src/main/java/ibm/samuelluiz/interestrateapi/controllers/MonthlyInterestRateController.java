@@ -33,6 +33,7 @@ public class MonthlyInterestRateController {
     }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Map<String, Object>> findAll(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "size", defaultValue = "10000") Integer size,
@@ -53,6 +54,7 @@ public class MonthlyInterestRateController {
     }
 
     @GetMapping("/{uuid}")
+    @ResponseStatus(HttpStatus.OK)
     public MonthlyInterestRate findByUUID(@PathVariable String uuid) {
         MonthlyInterestRate obj = service.findByUUID(uuid);
         createLinkToList(obj);
@@ -66,6 +68,7 @@ public class MonthlyInterestRateController {
     }
 
     @PutMapping("/{uuid}")
+    @ResponseStatus(HttpStatus.OK)
     public MonthlyInterestRate update(@RequestBody MonthlyInterestRate obj, @PathVariable String uuid) {
         return service.update(obj, uuid);
     }
