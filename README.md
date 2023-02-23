@@ -11,10 +11,10 @@ cd interest-rate-api
 ./run.sh
 ```
 
-ou
+ou se quiser rodar os testes:
 
 ```
-mvn clean install
+mvn clean package
 docker-compose build
 docker-compose up --force-recreate
 ```
