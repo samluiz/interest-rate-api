@@ -10,14 +10,22 @@
 	</parent>
 	<groupId>ibm.samuelluiz</groupId>
 	<artifactId>interestrateapi</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>interestrateapi</name>
-	<description>Interest Rate API from the Central Bank of Brazil</description>
+	<version>1.0.0</version>
+	<name>Taxa de juros mensal API</name>
+	<description>
+		API que faz a leitura, salva, remove e apresenta dados do DASFN.
+	</description>
 	<properties>
 		<java.version>11</java.version>
 		<spring-cloud.version>2021.0.5</spring-cloud.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
