@@ -4,6 +4,7 @@ import ibm.samuelluiz.interestrateapi.clients.MainClient;
 import ibm.samuelluiz.interestrateapi.exceptions.services.InvalidQueryException;
 import ibm.samuelluiz.interestrateapi.exceptions.services.ResourceNotFoundException;
 import ibm.samuelluiz.interestrateapi.models.MonthlyInterestRate;
+import ibm.samuelluiz.interestrateapi.models.dtos.MonthlyInterestRateList;
 import ibm.samuelluiz.interestrateapi.repositories.MonthlyInterestRateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,7 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static ibm.samuelluiz.interestrateapi.utils.ServiceUtils.getNullPropertyNames;
 import static org.springframework.beans.BeanUtils.copyProperties;
@@ -30,7 +33,10 @@ public class MonthlyInterestRateService {
     }
 
     public void populate(int amount) {
-        repository.saveAll(client.populate(amount).getResults());
+
+        Set<MonthlyInterestRate> results = client.populate(amount).getResults();
+
+        repository.saveAll(results);
     }
 
     public Page<MonthlyInterestRate> findAll(Pageable pageable) {
