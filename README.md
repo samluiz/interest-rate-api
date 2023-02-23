@@ -11,7 +11,7 @@ cd interest-rate-api
 ./run.sh
 ```
 
-ou se quiser rodar os testes:
+caso queira rodar os testes:
 
 ```
 mvn clean package
