@@ -8,7 +8,15 @@ buscando diretamente do catálogo de dados abertos do sistema financeiro naciona
 ```
 git clone https://github.ibm.com/samuelluiz/interest-rate-api.git
 cd interest-rate-api
-docker compose up
+./run.sh
+```
+
+ou
+
+```
+mvn clean install
+docker-compose build
+docker-compose up --force-recreate
 ```
 
 ### Documentação
