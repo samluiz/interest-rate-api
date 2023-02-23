@@ -5,7 +5,6 @@ import ibm.samuelluiz.interestrateapi.services.MonthlyInterestRateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +14,6 @@ import java.util.Map;
 
 import static ibm.samuelluiz.interestrateapi.utils.ControllerUtils.createLinkToList;
 import static ibm.samuelluiz.interestrateapi.utils.ControllerUtils.generateResponse;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @RestController
 @RequestMapping(value = "/taxaJurosMensal")
