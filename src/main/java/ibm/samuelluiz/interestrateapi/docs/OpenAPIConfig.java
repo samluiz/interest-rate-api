@@ -1,4 +1,4 @@
-package ibm.samuelluiz.interestrateapi.documentation;
+package ibm.samuelluiz.interestrateapi.docs;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -14,7 +14,7 @@ public class OpenAPIConfig {
                         .description("API que lê, salva, remove e apresenta dados das taxas de juros de operações de " +
                                 "crédito por instituicao financeira, buscando diretamente do catálogo de dados abertos do " +
                                 "sistema financeiro nacional (DASFN) do Banco Central do Brasil.")
-                        .version("v0.0.1"));
+                        .version("v0.1.0"));
 
     }
 }
