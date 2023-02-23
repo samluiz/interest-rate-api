@@ -1,6 +1,7 @@
 package ibm.samuelluiz.interestrateapi.common;
 
 import ibm.samuelluiz.interestrateapi.models.MonthlyInterestRate;
+import ibm.samuelluiz.interestrateapi.models.dtos.MonthlyInterestRateDTO;
 import ibm.samuelluiz.interestrateapi.models.dtos.MonthlyInterestRateList;
 
 import java.util.ArrayList;
@@ -107,7 +108,59 @@ public class Constants {
             null,
             null);
 
-    public static final MonthlyInterestRateList MONTHLY_INTEREST_RATE_LIST = new MonthlyInterestRateList(Set.of(ENTITY, ENTITY_2, ENTITY_3, EMPTY_ENTITY, ENTITY_INVALID_CNPJ));
+    public static final MonthlyInterestRateDTO DTO = new MonthlyInterestRateDTO(
+            "FINANCIAMENTO",
+            7,
+            "ITAU UNIBANCO",
+            0.85,
+            7.43,
+            "12345678",
+            "Ago-2021",
+            "2021-08");
+
+    public static final MonthlyInterestRateDTO DTO_2 = new MonthlyInterestRateDTO(
+            "CARTAO",
+            2,
+            "ITI UNIBANCO",
+            0.85,
+            7.43,
+            "12345478",
+            "Ago-2021",
+            "2021-08");
+
+    public static final MonthlyInterestRateDTO DTO_3 = new MonthlyInterestRateDTO(
+            "CONSORCIO",
+            2,
+            "BRADESCO",
+            0.85,
+            7.43,
+            "12315678",
+            "Ago-2021",
+            "2021-08");
+
+    public static final MonthlyInterestRateDTO DTO_4 = new MonthlyInterestRateDTO(
+            "CARRO",
+            2,
+            "BRADESCO",
+            0.85,
+            7.43,
+            "12315678",
+            "Ago-2021",
+            "2021-08");
+
+    public static final MonthlyInterestRateDTO DTO_5 = new MonthlyInterestRateDTO(
+            "CASA",
+            2,
+            "BRADESCO",
+            0.85,
+            7.43,
+            "12315678",
+            "Ago-2021",
+            "2021-08");
+
+
+    public static final MonthlyInterestRateList MONTHLY_INTEREST_RATE_LIST = new MonthlyInterestRateList(
+            Set.of(DTO, DTO_2, DTO_3, DTO_4, DTO_5));
 
     public static final List<MonthlyInterestRate> FIVE_ITEMS_LIST = new ArrayList<>(List.of(new MonthlyInterestRate(),
             new MonthlyInterestRate(),

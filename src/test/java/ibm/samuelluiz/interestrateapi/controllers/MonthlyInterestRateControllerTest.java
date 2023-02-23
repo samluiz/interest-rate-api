@@ -41,14 +41,14 @@ public class MonthlyInterestRateControllerTest {
                         .content(objMapper.writeValueAsString(ENTITY))
                         .contentType(MediaType.APPLICATION_JSON))
                         .andExpect(status().isCreated())
-                        .andExpect(jsonPath("$.Modalidade").value(ENTITY.get_modality()))
-                        .andExpect(jsonPath("$.InstituicaoFinanceira").value(ENTITY.get_financialInstitution()))
-                        .andExpect(jsonPath("$.TaxaJurosAoAno").value(ENTITY.get_interestRateByYear()))
-                        .andExpect(jsonPath("$.TaxaJurosAoMes").value(ENTITY.get_interestRateByMonth()))
-                        .andExpect(jsonPath("$.Posicao").value(ENTITY.get_position()))
-                        .andExpect(jsonPath("$.anoMes").value(ENTITY.get_yearMonth()))
-                        .andExpect(jsonPath("$.cnpj8").value(ENTITY.get_eightDigitsCnpj()))
-                        .andExpect(jsonPath("$.Mes").value(ENTITY.get_month()));
+                        .andExpect(jsonPath("$.modalidade").value(ENTITY.get_modality()))
+                        .andExpect(jsonPath("$.instituicao_financeira").value(ENTITY.get_financialInstitution()))
+                        .andExpect(jsonPath("$.taxa_juros_ao_ano").value(ENTITY.get_interestRateByYear()))
+                        .andExpect(jsonPath("$.taxa_juros_ao_mes").value(ENTITY.get_interestRateByMonth()))
+                        .andExpect(jsonPath("$.posicao").value(ENTITY.get_position()))
+                        .andExpect(jsonPath("$.ano_mes").value(ENTITY.get_yearMonth()))
+                        .andExpect(jsonPath("$.cnpj_8").value(ENTITY.get_eightDigitsCnpj()))
+                        .andExpect(jsonPath("$.mes").value(ENTITY.get_month()));
     }
 
     @Test
@@ -93,14 +93,14 @@ public class MonthlyInterestRateControllerTest {
                         .content(objMapper.writeValueAsString(ENTITY))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.Modalidade").value(ENTITY.get_modality()))
-                .andExpect(jsonPath("$.InstituicaoFinanceira").value(ENTITY.get_financialInstitution()))
-                .andExpect(jsonPath("$.TaxaJurosAoAno").value(ENTITY.get_interestRateByYear()))
-                .andExpect(jsonPath("$.TaxaJurosAoMes").value(ENTITY.get_interestRateByMonth()))
-                .andExpect(jsonPath("$.Posicao").value(ENTITY.get_position()))
-                .andExpect(jsonPath("$.anoMes").value(ENTITY.get_yearMonth()))
-                .andExpect(jsonPath("$.cnpj8").value(ENTITY.get_eightDigitsCnpj()))
-                .andExpect(jsonPath("$.Mes").value(ENTITY.get_month()));
+                .andExpect(jsonPath("$.modalidade").value(ENTITY.get_modality()))
+                .andExpect(jsonPath("$.instituicao_financeira").value(ENTITY.get_financialInstitution()))
+                .andExpect(jsonPath("$.taxa_juros_ao_ano").value(ENTITY.get_interestRateByYear()))
+                .andExpect(jsonPath("$.taxa_juros_ao_mes").value(ENTITY.get_interestRateByMonth()))
+                .andExpect(jsonPath("$.posicao").value(ENTITY.get_position()))
+                .andExpect(jsonPath("$.ano_mes").value(ENTITY.get_yearMonth()))
+                .andExpect(jsonPath("$.cnpj_8").value(ENTITY.get_eightDigitsCnpj()))
+                .andExpect(jsonPath("$.mes").value(ENTITY.get_month()));
     }
 
     @Test
