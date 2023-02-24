@@ -24,36 +24,41 @@ public class MonthlyInterestRate extends RepresentationModel<MonthlyInterestRate
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(length = 36)
+    @Column(name = "uuid", length = 36)
     private String _uuid;
     @JsonProperty("modalidade")
     @NotEmpty(message = "O campo 'modalidade' não pode ser vazio.")
+    @Column(name = "modalidade")
     private String _modality;
     @JsonProperty("posicao")
     @NotNull(message = "O campo 'posicao' não pode ser nulo.")
+    @Column(name = "posicao")
     private Integer _position;
     @JsonProperty("instituicao_financeira")
     @NotEmpty(message = "O campo 'instituicao_financeira' não pode ser vazio.")
+    @Column(name = "instituicao_financeira")
     private String _financialInstitution;
     @JsonProperty("taxa_juros_ao_mes")
     @NotNull(message = "O campo 'taxa_juros_ao_mes' não pode ser vazio.")
+    @Column(name = "taxa_juros_ao_mes")
     private Double _interestRateByMonth;
     @JsonProperty("taxa_juros_ao_ano")
     @NotNull(message = "O campo 'taxa_juros_ao_ano' não pode ser vazio.")
+    @Column(name = "taxa_juros_ao_ano")
     private Double _interestRateByYear;
     @JsonProperty("cnpj_8")
     @NotEmpty(message = "O campo 'cnpj_8' não pode ser vazio.")
-    @Size(min = 8, max = 8, message = "O campo 'cnpj8' deve ter 8 dígitos.")
-    @Column(length = 8)
+    @Size(min = 8, max = 8, message = "O campo 'cnpj_8' deve ter 8 dígitos.")
+    @Column(name = "cnpj_8", length = 8)
     private String _eightDigitsCnpj;
     @JsonProperty("mes")
     @NotEmpty
     @Size(min = 8, max = 8, message = "O campo 'mes' deve ter 8 dígitos. ex: Ago-2003")
-    @Column(length = 8)
+    @Column(name = "mes", length = 8)
     private String _month;
     @JsonProperty("ano_mes")
     @NotEmpty
     @Size(min = 7, max = 7, message = "O campo 'ano_mes' deve ter 7 dígitos. ex: 2003-08")
-    @Column(length = 7)
+    @Column(name = "ano_mes", length = 7)
     private String _yearMonth;
 }
