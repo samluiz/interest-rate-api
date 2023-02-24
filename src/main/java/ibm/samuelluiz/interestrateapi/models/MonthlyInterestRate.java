@@ -1,7 +1,6 @@
 package ibm.samuelluiz.interestrateapi.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import ibm.samuelluiz.interestrateapi.models.dtos.MonthlyInterestRateDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
