@@ -15,6 +15,7 @@ import java.util.Map;
 import static ibm.samuelluiz.interestrateapi.utils.ControllerUtils.createLinkToList;
 import static ibm.samuelluiz.interestrateapi.utils.ControllerUtils.generateResponse;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/taxaJurosMensal")
 public class MonthlyInterestRateController {
