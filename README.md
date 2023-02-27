@@ -1,3 +1,47 @@
+# Interest Rate API
+
+API that get interest rate records directly from Brazil open catalog of the national financial system and perform CRUD operations based on that data.
+
+# How To Run?
+
+```
+git clone https://github.ibm.com/samuelluiz/interest-rate-api.git
+cd interest-rate-api
+./run.sh
+```
+
+in case you wanna see the tests:
+
+```
+mvn clean package
+docker-compose build
+docker-compose up --force-recreate
+```
+
+### Docs
+
+<a href="http://localhost:6868/api" target="_blank">Swagger</a>
+
+# Endpoints
+
+### Base URL:
+```
+http://localhost:6868/api
+```
+
+### GET /taxaJurosMensal -> Find records in the database
+    ?size={int} (how many records to get per page)
+    ?page={int} (how many pages to paginate)
+    ?anoMes={string} (to search with the "ano_mes" property)
+    /{uuid} (search by UUID)
+    /popular?quantidade={int} (populate the database)
+    
+### POST /taxaJurosMensal -> Create a new record
+### PUT /taxaJurosMensal/{uuid} -> Update a record from the database
+### DELETE /taxaJurosMensal/{uuid} -> Delete a record from the database
+
+----------
+
 # API Taxa de juros
 
 API que lê, salva, remove e apresenta dados das taxas de juros de operações de crédito por instituicao financeira, 
@@ -30,8 +74,8 @@ docker-compose up --force-recreate
 http://localhost:6868/api
 ```
 
-### GET /taxaJurosMensal -> Buscar ou popular registros no banco de dados
-    ?size={int} (para informar quantos registros buscar do banco)
+### GET /taxaJurosMensal -> Buscar registros no banco de dados
+    ?size={int} (para informar quantos registros buscar por página)
     ?page={int} (para informar o número de páginas para paginação)
     ?anoMes={string} (para buscar com base na propriedade "anoMes")
     /{uuid} (buscar por UUID)
