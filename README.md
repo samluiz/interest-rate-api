@@ -5,7 +5,7 @@ API that get interest rate records directly from Brazil open catalog of the nati
 # How To Run?
 
 ```
-git clone https://github.ibm.com/samuelluiz/interest-rate-api.git
+git clone https://github.com/samluiz/interest-rate-api.git
 cd interest-rate-api
 ./run.sh
 ```
@@ -50,7 +50,7 @@ buscando diretamente do catálogo de dados abertos do sistema financeiro naciona
 # Como subir a aplicação?
 
 ```
-git clone https://github.ibm.com/samuelluiz/interest-rate-api.git
+git clone https://github.com/samluiz/interest-rate-api.git
 cd interest-rate-api
 ./run.sh
 ```
