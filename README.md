@@ -14,6 +14,7 @@ API that get interest rate records directly from Brazil open catalog of the nati
 ```
 git clone https://github.com/samluiz/interest-rate-api.git
 cd interest-rate-api
+./build.sh
 ./run.sh
 ```
 
@@ -66,6 +67,7 @@ buscando diretamente do catálogo de dados abertos do sistema financeiro naciona
 ```
 git clone https://github.com/samluiz/interest-rate-api.git
 cd interest-rate-api
+./build.sh
 ./run.sh
 ```
 
