@@ -2,11 +2,19 @@
 
 API that get interest rate records directly from Brazil open catalog of the national financial system and perform CRUD operations based on that data.
 
+## Tech stack
+
+- Java
+- Spring Boot
+- MySQL
+- Docker
+
 # How To Run?
 
 ```
 git clone https://github.com/samluiz/interest-rate-api.git
 cd interest-rate-api
+./build.sh
 ./run.sh
 ```
 
@@ -47,11 +55,19 @@ http://localhost:6868/api
 API que lê, salva, remove e apresenta dados das taxas de juros de operações de crédito por instituicao financeira, 
 buscando diretamente do catálogo de dados abertos do sistema financeiro nacional (DASFN) do Banco Central do Brasil.
 
+## Tecnologias
+
+- Java
+- Spring Boot
+- MySQL
+- Docker
+
 # Como subir a aplicação?
 
 ```
 git clone https://github.com/samluiz/interest-rate-api.git
 cd interest-rate-api
+./build.sh
 ./run.sh
 ```
 
