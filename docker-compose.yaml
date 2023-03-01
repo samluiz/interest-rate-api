@@ -2,6 +2,7 @@ version: "3.8"
 
 services:
   mysqldb:
+    container_name: database
     image: mysql:latest
     restart: unless-stopped
     env_file: ./.env
@@ -10,9 +11,12 @@ services:
       - MYSQL_DATABASE=$MYSQLDB_DATABASE
     ports:
       - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
+    networks:
+      - interest-rate-api-network
     volumes:
       - db:/var/lib/mysql
   app:
+    container_name: api
     depends_on:
       - mysqldb
     build: ./
@@ -20,6 +24,8 @@ services:
     env_file: ./.env
     ports:
       - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
+    networks:
+      - interest-rate-api-network
     environment:
       SPRING_APPLICATION_JSON: '{
         "spring.datasource.url"  : "jdbc:mysql://mysqldb:$MYSQLDB_DOCKER_PORT/$MYSQLDB_DATABASE?serverTimezone=UTC&useSSL=false&autoReconnect=true&allowPublicKeyRetrieval=true",
@@ -36,3 +42,7 @@ services:
 
 volumes:
   db:
+
+networks:
+  interest-rate-api-network:
+    driver: bridge
