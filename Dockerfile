@@ -1,18 +1,19 @@
-FROM eclipse-temurin:11-jdk as builder
+FROM eclipse-temurin:11-jdk-jammy as base
 
-MAINTAINER samuelluiz@ibm
+WORKDIR /app
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+RUN sed -i 's/\r$//' mvnw
+COPY src ./src
 
-ARG JAR_FILE=target/*.jar
+FROM base as test
+RUN ./mvnw test
 
-COPY ${JAR_FILE} app.jar
+FROM base as build
+RUN ./mvnw package -Dskip-tests
 
-RUN java -Djarmode=layertools -jar app.jar extract
+FROM eclipse-temurin:11-jdk-jammy as production
 
-FROM eclipse-temurin:11-jdk
-
-COPY --from=builder dependencies/ ./
-COPY --from=builder snapshot-dependencies/ ./
-COPY --from=builder spring-boot-loader/ ./
-COPY --from=builder application/ ./
-
-ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
+EXPOSE 8080
+COPY --from=build app/target/*.jar app.jar
+CMD ["java", "-jar", "app.jar"]
