@@ -15,9 +15,9 @@ resource "google_compute_firewall" "default" {
   network = google_compute_network.api-network.name
 
   allow {
-    protocol = "all"
+    protocol = "tcp"
+    ports    = ["80", "8080", "1000-2000", "22"]
   }
-
   priority = 1000
   direction = "INGRESS"
   source_ranges = ["0.0.0.0/0"]
