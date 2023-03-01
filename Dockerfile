@@ -1,19 +1,20 @@
-FROM eclipse-temurin:11-jdk-jammy as base
-
+# our base build image
+FROM maven:3.8.7-eclipse-temurin-11-alpine as maven
 WORKDIR /app
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
-RUN sed -i 's/\r$//' mvnw
-COPY src ./src
-
-FROM base as test
-RUN ./mvnw test
-
-FROM base as build
-RUN ./mvnw package -Dskip-tests
-
-FROM eclipse-temurin:11-jdk-jammy as production
-
-EXPOSE 8080
-COPY --from=build app/target/*.jar app.jar
-CMD ["java", "-jar", "app.jar"]
+# copy the Project Object Model file
+COPY ./pom.xml ./pom.xml
+# fetch all dependencies
+RUN mvn dependency:go-offline -B
+# copy your other files
+COPY ./src ./src
+# build for release
+# NOTE: my-project-* should be replaced with the proper prefix
+RUN mvn package && cp target/interestrateapi-*.jar app.jar
+# smaller, final base image
+FROM eclipse-temurin:11-alpine
+# set deployment directory
+WORKDIR /app
+# copy over the built artifact from the maven image
+COPY --from=maven /app/app.jar ./app.jar
+# set the startup command to run the binary
+CMD ["java", "-jar", "/app/app.jar"]
