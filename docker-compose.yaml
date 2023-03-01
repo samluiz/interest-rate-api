@@ -30,7 +30,7 @@ services:
         "spring.jpa.properties.hibernate.dialect.storage_engine" : "innodb"
       }'
     volumes:
-      - .m2:/root/.m2
+      - ./db/mysql:/data/db
     stdin_open: true
     tty: true
 
