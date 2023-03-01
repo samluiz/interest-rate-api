@@ -9,7 +9,7 @@ RUN mvn dependency:go-offline -B
 COPY ./src ./src
 # build for release
 # NOTE: my-project-* should be replaced with the proper prefix
-RUN mvn package && cp target/interestrateapi-*.jar app.jar
+RUN mvn package -DskipTests && cp target/interestrateapi-*.jar app.jar
 # smaller, final base image
 FROM eclipse-temurin:11-alpine
 # set deployment directory
