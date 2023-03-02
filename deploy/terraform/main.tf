@@ -21,6 +21,6 @@ resource "google_compute_firewall" "default" {
   priority = 1000
   direction = "INGRESS"
   source_ranges = ["0.0.0.0/0"]
-
+  depends_on = [google_compute_network.api-network]
   source_tags = ["web"]
 }

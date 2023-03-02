@@ -27,6 +27,7 @@ resource "google_compute_instance" "api-server" {
   metadata = {
     startup-script = file("script.tpl")
   }
+  tags = ["http-server", "https-server"]
   network_interface {
     subnetwork = google_compute_subnetwork.public-api-subnet.name
     access_config {}
