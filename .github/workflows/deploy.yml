@@ -15,6 +15,9 @@ jobs:
       # Git checkout
       - name: Checkout
         uses: actions/checkout@v3
+      # get database properties
+      - name: Get database properties
+        run: echo -e "\nspring.datasource.url=${{ secrets.DB_URL }}\nspring.datasource.username=${{ secrets.DB_USER }}\nspring.datasource.password=${{ secrets.DB_PASSWORD }}\n" >> ./src/main/resources/application.properties
       # Authenticate
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
@@ -39,10 +42,6 @@ jobs:
       # push image to registry
       - name: Push Docker image
         run: docker push $IMAGE_NAME
-        
-      # get database properties
-      - name: Get database properties
-        run: echo -e "\nspring.datasource.url=${{ secrets.DB_URL }}\nspring.datasource.username=${{ secrets.DB_USER }}\nspring.datasource.password=${{ secrets.DB_PASSWORD }}\n" >> ./src/main/resources/application.properties
 
       # deploy image
       - name: Deploy Docker image
