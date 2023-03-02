@@ -15,9 +15,15 @@ jobs:
       # Git checkout
       - name: Checkout
         uses: actions/checkout@v3
-      # get database properties
-      - name: Get database properties
-        run: echo -e "\nspring.datasource.url=${{ secrets.DB_URL }}\nspring.datasource.username=${{ secrets.DB_USER }}\nspring.datasource.password=${{ secrets.DB_PASSWORD }}\n" >> ./src/main/resources/application.properties
+      # set database url
+      - name: Set database url
+        run: export DB_URL=${{ secrets.DB_URL }}
+      # set database user
+      - name: Set database user
+        run: export DB_USER=${{ secrets.DB_USER }}
+      # set database password
+      - name: Set database password
+        run: export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
       # Authenticate
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
