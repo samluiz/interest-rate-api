@@ -1,4 +1,4 @@
-name: GCP
+name: Deploy
 
 on:
   push:
@@ -15,15 +15,6 @@ jobs:
       # Git checkout
       - name: Checkout
         uses: actions/checkout@v3
-      # set database url
-      - name: Set database url
-        run: export DB_URL=${{ secrets.DB_URL }}
-      # set database user
-      - name: Set database user
-        run: export DB_USER=${{ secrets.DB_USER }}
-      # set database password
-      - name: Set database password
-        run: export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
       # Authenticate
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
