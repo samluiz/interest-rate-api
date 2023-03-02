@@ -39,6 +39,10 @@ jobs:
       # push image to registry
       - name: Push Docker image
         run: docker push $IMAGE_NAME
+        
+      # get database properties
+      - name: Get database properties
+        run: echo -e "\nspring.datasource.url=${{ secrets.DB_URL }}\nspring.datasource.username=${{ secrets.DB_USER }}\nspring.datasource.password=${{ secrets.DB_PASSWORD }}\n" >> ./src/main/resources/application.properties
 
       # deploy image
       - name: Deploy Docker image
