@@ -1,36 +1,48 @@
 package ibm.samuelluiz.interestrateapi.clients;
 
-import ibm.samuelluiz.interestrateapi.repositories.MonthlyInterestRateRepository;
-import ibm.samuelluiz.interestrateapi.services.MonthlyInterestRateService;
+import feign.Feign;
+import feign.jackson.JacksonDecoder;
+import feign.jackson.JacksonEncoder;
+import feign.mock.HttpMethod;
+import feign.mock.MockClient;
+import ibm.samuelluiz.interestrateapi.common.TestClient;
+import ibm.samuelluiz.interestrateapi.models.dtos.MonthlyInterestRateList;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.cloud.openfeign.support.SpringMvcContract;
 
-import static ibm.samuelluiz.interestrateapi.common.Constants.FIVE_ITEMS_LIST;
-import static ibm.samuelluiz.interestrateapi.common.Constants.MONTHLY_INTEREST_RATE_LIST;
-import static org.mockito.Mockito.*;
+import static ibm.samuelluiz.interestrateapi.common.Constants.BASE_URL;
+import static ibm.samuelluiz.interestrateapi.common.Constants.RESPONSE;
+import static org.assertj.core.api.Assertions.assertThat;
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
 public class MainClientTest {
 
-    @Mock
-    private MainClient client;
 
-    @Mock
-    private MonthlyInterestRateRepository repository;
 
-    @InjectMocks
-    private MonthlyInterestRateService service;
+
+    private TestClient client;
 
     @Test
-    public void populateWithDataFromExternalApiReturnsNothing() {
-        when(client.populate(5)).thenReturn(MONTHLY_INTEREST_RATE_LIST);
-        when(repository.saveAll(MONTHLY_INTEREST_RATE_LIST.getResults())).thenReturn(FIVE_ITEMS_LIST);
+    public void getDataFromApiReturnsOk() {
+        this.buildFeignClient(new MockClient().ok(
+                HttpMethod.GET,
+                BASE_URL.concat("/TaxasJurosMensalPorMes"),
+                RESPONSE
+        ));
 
-        service.populate(5);
+        MonthlyInterestRateList list = client.populate();
 
-        verify(client, times(1)).populate(5);
+        assertThat(list).isNotNull();
+        assertThat(list.getResults().size()).isEqualTo(1);
+    }
+
+    private void buildFeignClient(MockClient mockClient) {
+        client = Feign.builder()
+                .client(mockClient)
+                .encoder(new JacksonEncoder())
+                .decoder(new JacksonDecoder())
+                .contract(new SpringMvcContract())
+                .target(TestClient.class, BASE_URL);
     }
 }

@@ -11,6 +11,24 @@ import java.util.UUID;
 
 public class Constants {
 
+    public static final String BASE_URL = "https://olinda.bcb.gov.br/olinda/servico/taxaJuros/versao/v2/odata";
+
+    public static final String RESPONSE = "{\n" +
+            "  \"@odata.context\": \"https://was-p.bcnet.bcb.gov.br/olinda/servico/taxaJuros/versao/v2/odata$metadata#TaxasJurosMensalPorMes\",\n" +
+            "  \"value\": [\n" +
+            "    {\n" +
+            "      \"Mes\": \"Jan-2023\",\n" +
+            "      \"Modalidade\": \"FINANCIAMENTO IMOBILIÁRIO COM TAXAS REGULADAS - PRÉ-FIXADO\",\n" +
+            "      \"Posicao\": 1,\n" +
+            "      \"InstituicaoFinanceira\": \"BCO DO BRASIL S.A.\",\n" +
+            "      \"TaxaJurosAoMes\": 0.00,\n" +
+            "      \"TaxaJurosAoAno\": 0.00,\n" +
+            "      \"cnpj8\": \"00000000\",\n" +
+            "      \"anoMes\": \"2023-01\"\n" +
+            "    }\n" +
+            "  ]\n" +
+            "}";
+
     public static final List<MonthlyInterestRate> EMPTY_LIST = new ArrayList<>();
 
     public static final MonthlyInterestRate EMPTY_ENTITY = new MonthlyInterestRate();

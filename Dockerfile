@@ -3,8 +3,6 @@ FROM maven:3.8.7-eclipse-temurin-11-alpine as maven
 WORKDIR /app
 # copy the Project Object Model file
 COPY ./pom.xml ./pom.xml
-# fetch all dependencies
-RUN mvn dependency:go-offline -B
 # copy your other files
 COPY ./src ./src
 # build for release
