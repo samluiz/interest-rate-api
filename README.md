@@ -7,7 +7,10 @@ API that get interest rate records directly from Brazil open catalog of the nati
 - Java
 - Spring Boot
 - MySQL
+- PlanetScale
 - Docker
+- Github Actions
+- Google Cloud Run
 
 # How To Run?
 
@@ -60,7 +63,10 @@ buscando diretamente do catálogo de dados abertos do sistema financeiro naciona
 - Java
 - Spring Boot
 - MySQL
+- PlanetScale
 - Docker
+- Github Actions
+- Google Cloud Run
 
 # Como subir a aplicação?
 
