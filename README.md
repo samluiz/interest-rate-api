@@ -31,13 +31,13 @@ docker-compose up --force-recreate
 
 ### Docs
 
-<a href="http://localhost:6868/api" target="_blank">Swagger</a>
+<a href="http://localhost/api" target="_blank">Swagger</a>
 
 # Endpoints
 
 ### Base URL:
 ```
-http://localhost:6868/api
+http://localhost/api
 ```
 
 ### GET /taxaJurosMensal -> Find records in the database
@@ -87,13 +87,13 @@ docker-compose up --force-recreate
 
 ### Documentação
 
-<a href="http://localhost:6868/api" target="_blank">Swagger</a>
+<a href="http://localhost/api" target="_blank">Swagger</a>
 
 # Endpoints
 
 ### URL base:
 ```
-http://localhost:6868/api
+http://localhost/api
 ```
 
 ### GET /taxaJurosMensal -> Buscar registros no banco de dados
