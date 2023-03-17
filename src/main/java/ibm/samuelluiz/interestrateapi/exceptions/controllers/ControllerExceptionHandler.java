@@ -1,5 +1,6 @@
 package ibm.samuelluiz.interestrateapi.exceptions.controllers;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import ibm.samuelluiz.interestrateapi.exceptions.services.InvalidQueryException;
 import ibm.samuelluiz.interestrateapi.exceptions.services.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -65,6 +66,22 @@ public class ControllerExceptionHandler {
                         .replaceAll("\\[*]*", ""),
                 request.getRequestURI()
         );
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(InvalidFormatException.class)
+    public ResponseEntity<StandardError> invalidType(InvalidFormatException e,
+                                                          HttpServletRequest request) {
+        String error = "Dados inválidos. Verifique os tipos de cada campo e tente novamente.";
+        HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+        StandardError err = new StandardError(
+                Instant.now(),
+                status.value(),
+                error,
+                e.getMessage(),
+                request.getRequestURI()
+        );
+
         return ResponseEntity.status(status).body(err);
     }
 }

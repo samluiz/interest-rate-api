@@ -8,9 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 
 @Data
@@ -32,6 +30,7 @@ public class MonthlyInterestRate extends RepresentationModel<MonthlyInterestRate
     private String _modality;
     @JsonProperty("posicao")
     @NotNull(message = "O campo 'posicao' não pode ser nulo.")
+    @Min(value = 1, message = "O valor de 'posicao' deve ser um número maior ou igual a 1.")
     @Column(name = "posicao")
     private Integer _position;
     @JsonProperty("instituicao_financeira")
@@ -40,10 +39,12 @@ public class MonthlyInterestRate extends RepresentationModel<MonthlyInterestRate
     private String _financialInstitution;
     @JsonProperty("taxa_juros_ao_mes")
     @NotNull(message = "O campo 'taxa_juros_ao_mes' não pode ser vazio.")
+    @DecimalMin(value = "0.0", inclusive = true, message = "O valor de 'taxa_juros_ao_mes' deve ser um número decimal maior ou igual a 0.0.")
     @Column(name = "taxa_juros_ao_mes")
     private Double _interestRateByMonth;
     @JsonProperty("taxa_juros_ao_ano")
     @NotNull(message = "O campo 'taxa_juros_ao_ano' não pode ser vazio.")
+    @DecimalMin(value = "0.0", inclusive = true, message = "O valor de 'taxa_juros_ao_ano' deve ser um número decimal maior ou igual a 0.0.")
     @Column(name = "taxa_juros_ao_ano")
     private Double _interestRateByYear;
     @JsonProperty("cnpj_8")
