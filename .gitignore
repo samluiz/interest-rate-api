@@ -8,6 +8,8 @@ target/
 /deploy/terraform/*.tfstate
 /deploy/terraform/*.backup
 
+.env
+
 ### STS ###
 .apt_generated
 .classpath
